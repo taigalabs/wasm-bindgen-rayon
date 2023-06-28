@@ -16,17 +16,16 @@
 //   }
 // };
 
-
 const path = require("path");
 const webpack = require("webpack");
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
+const mainPath = path.resolve(__dirname, "index.ts");
+console.log(11, mainPath);
+
 module.exports = {
   mode: "production",
-  entry: {
-    main: path.resolve(__dirname, "index.ts"),
-    // main: path.resolve(__dirname, "index.js"),
-  },
+  entry:  path.resolve(__dirname, "index.ts"),
   module: {
     rules: [
       {
@@ -55,5 +54,11 @@ module.exports = {
       "Cross-Origin-Embedder-Policy": "require-corp",
       "Cross-Origin-Opener-Policy": "same-origin",
     },
+    client: {
+      overlay: { warnings: false }
+    },
   },
+  // ignoreWarnings: [
+  //   /Circular dependency between chunks with runtime/
+  // ],
 };
