@@ -18,9 +18,9 @@ function wrapExports({ generate }) {
 async function initHandlers() {
   let [singleThread, multiThread] = await Promise.all([
     (async () => {
-      // const singleThread = await import('./pkg/wasm_bindgen_rayon_demo.js');
-      // await singleThread.default();
-      // return wrapExports(singleThread);
+      const singleThread = await import('./pkg/wasm_bindgen_rayon_demo.js');
+      await singleThread.default();
+      return wrapExports(singleThread);
     })(),
     (async () => {
       // If threads are unsupported in this browser, skip this handler.
