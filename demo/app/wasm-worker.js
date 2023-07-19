@@ -25,7 +25,11 @@ async function initHandlers() {
     (async () => {
       // If threads are unsupported in this browser, skip this handler.
       console.log(111);
-      if (!(await threads())) return;
+      if (!(await threads())) {
+        console.log("thread no support");
+        return;
+      }
+      console.log("thread ok");
       const multiThread = await import(
         "/pkg-parallel/wasm_bindgen_rayon_demo.js"
       );
