@@ -11,20 +11,20 @@
  * limitations under the License.
  */
 
-import * as Comlink from 'comlink';
+import * as Comlink from "comlink";
 
 const maxIterations = 1000;
 
-const canvas = document.getElementById('canvas');
+const canvas = document.getElementById("canvas");
 const { width, height } = canvas;
-const ctx = canvas.getContext('2d');
-const timeOutput = document.getElementById('time');
+const ctx = canvas.getContext("2d");
+const timeOutput = document.getElementById("time");
 
 (async function init() {
   // Create a separate thread from wasm-worker.js and get a proxy to its handlers.
   let handlers = await Comlink.wrap(
-    new Worker(new URL('./wasm-worker.js', import.meta.url), {
-      type: 'module'
+    new Worker(new URL("./wasm-worker.js", import.meta.url), {
+      type: "module",
     })
   ).handlers;
 
@@ -39,18 +39,18 @@ const timeOutput = document.getElementById('time');
         let { rawImageData, time } = await handler({
           width,
           height,
-          maxIterations
+          maxIterations,
         });
         timeOutput.value = `${time.toFixed(2)} ms`;
         const imgData = new ImageData(rawImageData, width, height);
         ctx.putImageData(imgData, 0, 0);
       },
-      disabled: false
+      disabled: false,
     });
   }
 
-  setupBtn('singleThread');
+  setupBtn("singleThread");
   if (await handlers.supportsThreads) {
-    setupBtn('multiThread');
+    setupBtn("multiThread");
   }
 })();
