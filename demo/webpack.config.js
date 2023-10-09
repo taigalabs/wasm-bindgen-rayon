@@ -16,16 +16,12 @@
 //   }
 // };
 
-const path = require("path");
-const webpack = require("webpack");
-const CircularDependencyPlugin = require('circular-dependency-plugin');
-
 const mainPath = path.resolve(__dirname, "index.ts");
 console.log(11, mainPath);
 
 module.exports = {
   mode: "production",
-  entry:  path.resolve(__dirname, "index.ts"),
+  entry: path.resolve(__dirname, "index.ts"),
   module: {
     rules: [
       {
@@ -36,11 +32,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new CircularDependencyPlugin({
-      failOnError: true,
-      exclude: /node_modules/,
-      cwd: process.cwd(),
-    }),
+    // new CircularDependencyPlugin({
+    //   failOnError: true,
+    //   exclude: /node_modules/,
+    //   cwd: process.cwd(),
+    // }),
   ],
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -55,7 +51,7 @@ module.exports = {
       "Cross-Origin-Opener-Policy": "same-origin",
     },
     client: {
-      overlay: { warnings: false }
+      overlay: { warnings: false },
     },
   },
   // ignoreWarnings: [
